@@ -8,7 +8,7 @@ function getAllFiles(rootPath, newFolder, num) {
     }
     files.forEach(file => {
       const newPath = path.join(rootPath, file);
-      const [name,ext] = file.split('.');
+      const [name, ext] = file.split('.');
       const endPath = path.join(__dirname, newFolder, `${name} копия ${num}.${ext}`)
       let newIndex = num++;
       fs.stat(newPath, (err, stats) => {
