@@ -2,14 +2,16 @@ const fs = require('fs');
 const path = require('path');
 
 
-function getAllFiles(pathName, endPath) {
+function getAllFiles(newFolder) {
+
+  const pathName = __dirname;
   fs.readdir(pathName, (err, files) => {
     if (err) {
-      return console.log(err)
+      return console.error(err)
     }
     files.forEach(file => {
-
       const newPath = path.join(pathName, file);
+      const endPath = path.join(__dirname, newFolder, file)
       fs.stat(newPath, (err, stats) => {
         stats.isDirectory()
             ? getAllFiles(newPath)
@@ -29,4 +31,4 @@ function moveFile(file, oldPath, newPath) {
   }
 }
 
-getAllFiles(__dirname)
+getAllFiles('newFolderForFiles')
