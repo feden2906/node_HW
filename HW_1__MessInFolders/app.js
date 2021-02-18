@@ -3,9 +3,9 @@ const path = require('path');
 
 function getAllFiles(rootPath, newFolder, num) {
   fs.readdir(rootPath, (err, files) => {
-    if (err) {
-      return console.error(err)
-    }
+
+    if (err) { return console.error(err) }
+
     files.forEach(file => {
       const newPath = path.join(rootPath, file);
       const [name, ext] = file.split('.');
