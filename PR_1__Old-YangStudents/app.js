@@ -20,3 +20,23 @@ const users = [
   {"id": 10,"age": 17, "name": "Roman", "gender": "male"}
 ]
 
+// const fs = require('fs');
+//
+// const readStream = fs.createReadStream(filePath1);
+// const writeStream = fs.createWriteStream(filePath2);
+//
+// readStream.on("data", chunk => {
+//   console.log(chunk)
+// })
+//
+// readStream.on('end', () => {
+//   console.log('Зчитування завершено')
+// })
+//
+//
+// readStream.on('data', chunk => {
+//   writeStream.write(chunk);
+// })
+//
+// readStream.pipe(writeStream);
+
