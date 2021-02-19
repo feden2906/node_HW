@@ -3,9 +3,17 @@ const path = require('path');
 
 function getAllFiles(pathName) {
   fs.readdir(pathName, (err, files) => {
-    files.map(item => {
+    if (err) {
+      console.log(err)
+      return
+    }
+    files.forEach(item => {
       const newPath = path.join(pathName, item);
       fs.stat(newPath, (err, stats) => {
+        if (err) {
+          console.log(err)
+          return
+        }
         stats.isDirectory()
             ? getAllFiles(newPath)
             : checkGender(item, newPath)
@@ -19,7 +27,8 @@ function checkGender(file, pathName) {
     fs.readFile(pathName, (err, data) => {
 
       if (err) {
-        return console.log(err);
+        console.log(err)
+        return
       }
       const {name, gender} = JSON.parse(data);
       let newDirectory;
@@ -37,7 +46,8 @@ function checkGender(file, pathName) {
 
 function moveStudent(oldPath, newPath, studentName) {
   if (oldPath === newPath) {
-    return console.log(`${studentName} have correct folder`)
+    console.log(`${studentName} have correct folder`)
+    return
   }
   fs.rename(oldPath, newPath, err => {
     if (err) {
@@ -45,6 +55,5 @@ function moveStudent(oldPath, newPath, studentName) {
     }
   })
 }
-
 
 getAllFiles(__dirname)
