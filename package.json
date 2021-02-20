@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/feden2906/node_HW/issues"
   },
-  "homepage": "https://github.com/feden2906/node_HW#readme"
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.1"
+  }
 }
