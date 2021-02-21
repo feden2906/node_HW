@@ -59,10 +59,11 @@ input, button, textarea, select {
 
 .wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: #ffd5ff;
 }
 .form {
@@ -84,4 +85,23 @@ input, button, textarea, select {
 .btn {
     background-color: darkgray;
     cursor: pointer;
+}
+.user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 150px;
+    background-color: plum;
+    border-radius: 20px;
+    margin: 15px 20px;
+    padding: 15px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.user:hover {
+    background-color: #ca92ca;
+}
+.error {
+    color: red;
 }
