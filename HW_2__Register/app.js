@@ -9,7 +9,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'static')));
 
-// конфігурація express щоб читав HBS
 app.set('view engine', '.hbs');
 app.engine('.hbs', expressHbs({defaultLayout: false}))
 app.set('views', path.join(__dirname, 'static'));
@@ -76,7 +75,7 @@ app.get('/users/:userID', ({params: {userID}}, res) => {
 })
 
 app.get('/error', (req, res) => {
-  res.render('error', {error: errorState});
+  res.render('error', {errorState});
 });
 
 app.listen(5000, (err) => {
