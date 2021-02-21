@@ -12,6 +12,10 @@
 
 <form class="form" action="/register" method="post">
   <h1 class="title">Sign up</h1>
+  {{#if error}}
+    <div class="error">User with this email exists</div>
+  {{/if}}
+  <input class="input" type="text" name="userName" placeholder="user name">
   <input class="input" type="email" name="email" placeholder="email">
   <input class="input" type="password" name="password" placeholder="password">
   <input class="input btn" type="submit" value="submit">
