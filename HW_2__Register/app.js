@@ -9,53 +9,60 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'static')));
 
-
 // конфігурація express щоб читав HBS
 app.set('view engine', '.hbs');
 app.engine('.hbs', expressHbs({defaultLayout: false}))
 app.set('views', path.join(__dirname, 'static'));
 
-const pathToDB = path.join(__dirname, 'users.json')
+const pathToDB = path.join(__dirname, 'users.json');
+let errorState = '';
 
 function getUsers() {
   return JSON.parse(fs.readFileSync(pathToDB));
 }
+
 function setUsers(users) {
-  fs.writeFile(pathToDB, JSON.stringify(users), (err => {
+  fs.writeFile(pathToDB, JSON.stringify(users), err => {
     if (err) {
-      console.error(err)
+      console.error(err);
     }
-  }))
+  })
 }
 
 app.get('/login', (req, res) => {
   res.render('login');
 });
+
 app.post('/login', ({body: {email, password}}, res) => {
-  const user = getUsers().some(user => user.email === email && user.password === password);
+  const user = getUsers().find(user => user.email === email && user.password === password);
+
   if (user) {
-    res.redirect('/users');
+    res.redirect(`/users/${user.id}`);
     return;
   }
-  res.redirect('/register');
-})
 
+  errorState = 'Wrong email or password';
+  res.redirect('/error');
+})
 
 app.get('/register', (req, res) => {
   res.render('register');
 })
+
 app.post('/register', ({body}, res) => {
-  const users = getUsers();
+  const users = getUsers().sort((a, b) => a.id - b.id);
   const userExists = users.some(user => user.email === body.email);
+
   if (userExists) {
-    res.render('register', {error: true})
-    return
+    res.redirect('/error');
+    errorState = 'User with this email exists';
+    return;
   }
-  users.push(body);
+
+  users.push({...body, id: users[users.length - 1].id + 1});
   setUsers(users);
   res.redirect('/users');
 })
-
 
 app.get('/users', (req, res) => {
   const users = getUsers();
@@ -65,17 +72,16 @@ app.get('/users', (req, res) => {
 app.get('/users/:userID', ({params: {userID}}, res) => {
   const users = getUsers();
   const user = users.find(user => user.id === +userID);
-  res.render('chosenUser', {user})
+  res.render('chosenUser', {user});
 })
 
-
+app.get('/error', (req, res) => {
+  res.render('error', {error: errorState});
+});
 
 app.listen(5000, (err) => {
   if (err) {
     console.error('problem with server starting', err);
   }
-  console.log('Server started')
-})
-
-
-
+  console.log('Server started');
+});
