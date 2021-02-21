@@ -7,7 +7,6 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
-
 app.use(express.static(path.join(__dirname, 'static')));
 
 
@@ -17,7 +16,6 @@ app.engine('.hbs', expressHbs({defaultLayout: false}))
 app.set('views', path.join(__dirname, 'static'));
 
 const pathToDB = path.join(__dirname, 'users.json')
-
 
 function getUsers() {
   return JSON.parse(fs.readFileSync(pathToDB));
@@ -29,7 +27,6 @@ function setUsers(users) {
     }
   }))
 }
-
 
 app.get('/login', (req, res) => {
   res.render('login');
@@ -65,9 +62,12 @@ app.get('/users', (req, res) => {
   res.render("users", {users});
 })
 
-app.post('/users', (req, res) => {
-
+app.get('/users/:userID', ({params: {userID}}, res) => {
+  const users = getUsers();
+  const user = users.find(user => user.id === +userID);
+  res.render('chosenUser', {user})
 })
+
 
 
 app.listen(5000, (err) => {
