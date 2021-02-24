@@ -30,19 +30,6 @@ module.exports = {
   },
 
 
-
-  //
-  // if (userExists) {
-  //   res.redirect('/error');
-  //   errorState = 'User with this email exists';
-  //   return;
-  // }
-  //
-  // users.push({...body, id: users[users.length - 1].id + 1});
-  // setUsers(users);
-  // res.redirect('/users');
-
-
   createUser: async (req, res) => {
     try {
       const { preferLanguage = 'en' } = req.body;
@@ -50,6 +37,20 @@ module.exports = {
       await userService.createUser(req.body, preferLanguage);
 
       res.status(statusCodes.CREATED).json(errorMessages.USER_IS_CREATED[preferLanguage]);
+    } catch (e) {
+      res.status(statusCodes.BAD_REQUEST).json(e.message);
+    }
+  },
+
+
+  deleteUser: async (req, res) => {
+    try {
+      const {userId} = req.params;
+      const { preferLanguage = 'en' } = req.body;
+
+      await userService.deleteUser(userId, preferLanguage);
+
+      res.json(errorMessages.USER_WERE_DELETED[preferLanguage]);
     } catch (e) {
       res.status(statusCodes.BAD_REQUEST).json(e.message);
     }

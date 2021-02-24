@@ -13,7 +13,7 @@ const pathDB = path.join(process.cwd(), 'dataBase', 'users.json');
 module.exports = {
   findAllUsers: async (preferLanguage, query) => {
     const data = await readFilePromise(pathDB);
-    const { userName } = query;
+    const {userName} = query;
     let users = JSON.parse(data);
 
     if (userName) {
@@ -54,5 +54,19 @@ module.exports = {
 
     users.push({...newUser, id: users[users.length - 1].id + 1});
     await writeFilePromise(pathDB, JSON.stringify(users));
+  },
+
+
+  deleteUser: async (userId, preferLanguage) => {
+    const data = await readFilePromise(pathDB);
+    const users = JSON.parse(data);
+
+    const filteredUsers = users.filter(user => user.id !== +userId);
+
+    if (users.length === filteredUsers.length) {
+      throw new Error(errorMessages.USER_NOT_FOUND[preferLanguage]);
+    }
+
+    await writeFilePromise(pathDB, JSON.stringify(filteredUsers));
   }
 }
