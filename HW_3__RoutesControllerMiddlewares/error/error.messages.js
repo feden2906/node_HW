@@ -14,5 +14,18 @@ module.exports = {
     ua: 'Користувачів не знайдено'
   },
 
+  USER_IS_CREATED: {
+    en: 'User is created',
+    ua: 'Користувача створено'
+  },
 
+  USER_IS_EXISTS: {
+    en: 'User with this email exists',
+    ua: 'Користувача з цією поштою вже зареэстровано'
+  },
+
+  USER_WERE_DELETED: {
+    en: 'User were deleted',
+    ua: 'Користувача видалено'
+  }
 }
