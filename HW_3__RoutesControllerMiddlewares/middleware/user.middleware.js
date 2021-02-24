@@ -1,10 +1,9 @@
-const errorCodes = require('../constant/errorCodes.enum');
+const errorCodes = require('../constant/statusCodes.enum');
 const errorMessages = require('../error/error.messages');
 
 module.exports = {
   checkIsIdValid: (req, res, next) => {
     try {
-
       const userId = +req.params.userId;
 
       if (userId < 0 || !Number.isInteger(userId) || Number.isNaN(userId)) {

@@ -1,36 +1,47 @@
 const userService = require('../service/user.cervice');
+const statusCodes = require('../constant/statusCodes.enum');
+const errorMessages = require('../error/error.messages');
 
 module.exports = {
-  getAllUsers: (req, res) => {
+  getAllUsers: async (req, res) => {
     try {
+      const { preferLanguage = 'en' } = req.body;
 
-      const users = userService.findUsers();
+      const users = await userService.findAllUsers(preferLanguage, req.query);
 
       res.json(users);
     } catch (e) {
-      res.status(400).json(e.message);
+      res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   },
 
-  getSingleUser: (req, res) => {
+
+  getSingleUser: async (req, res) => {
     try {
       const {userId} = req.params;
+      const { preferLanguage = 'en' } = req.body;
 
-      const user = userService.findUserById(userId);
+      const user = await userService.findUserById(userId, preferLanguage);
 
       res.json(user);
     } catch (e) {
-      res.status(400).json(e.message);
+      res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   },
+
+
+
+
+
+
 
   createUser: (req, res) => {
     try {
       userService.createUser(req.body);
 
-      res.status(201).json('User is created');
+      res.status(statusCodes.CREATED).json('User is created');
     } catch (e) {
-      res.status(400).json(e.message);
+      res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   }
 }
