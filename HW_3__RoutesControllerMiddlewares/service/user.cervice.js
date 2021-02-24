@@ -9,7 +9,6 @@ const writeFilePromise = promisify(fs.writeFile);
 
 const pathDB = path.join(process.cwd(), 'dataBase', 'users.json');
 
-
 module.exports = {
   findAllUsers: async (preferLanguage, query) => {
     const data = await readFilePromise(pathDB);
@@ -27,7 +26,6 @@ module.exports = {
     return users;
   },
 
-
   findUserById: async (userId, preferLanguage) => {
     const data = await readFilePromise(pathDB);
     const users = JSON.parse(data);
@@ -40,7 +38,6 @@ module.exports = {
 
     return chosenUser;
   },
-
 
   createUser: async (newUser, preferLanguage) => {
     const data = await readFilePromise(pathDB);
@@ -55,7 +52,6 @@ module.exports = {
     users.push({...newUser, id: users[users.length - 1].id + 1});
     await writeFilePromise(pathDB, JSON.stringify(users));
   },
-
 
   deleteUser: async (userId, preferLanguage) => {
     const data = await readFilePromise(pathDB);

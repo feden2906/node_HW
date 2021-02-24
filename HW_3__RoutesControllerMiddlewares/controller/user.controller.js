@@ -15,7 +15,6 @@ module.exports = {
     }
   },
 
-
   getSingleUser: async (req, res) => {
     try {
       const {userId} = req.params;
@@ -29,7 +28,6 @@ module.exports = {
     }
   },
 
-
   createUser: async (req, res) => {
     try {
       const { preferLanguage = 'en' } = req.body;
@@ -41,7 +39,6 @@ module.exports = {
       res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   },
-
 
   deleteUser: async (req, res) => {
     try {

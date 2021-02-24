@@ -37,5 +37,15 @@ module.exports = {
   NOT_VALID_ID: {
     en: 'Not Valid ID',
     ua: 'ID не валідний'
+  },
+
+  NOT_VALID_FORM: {
+    en: 'Some filed is empty',
+    ua: 'Обов\'язкове поле не заповнене'
+  },
+
+  NOT_VALID_USERNAME: {
+    en: 'Username cannot be a number',
+    ua: 'Ім\'я користувача не може бути числом'
   }
 }
