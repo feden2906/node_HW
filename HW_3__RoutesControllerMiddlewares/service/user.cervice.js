@@ -5,6 +5,7 @@ const {promisify} = require('util');
 const errorMessages = require('../error/error.messages');
 
 const readFilePromise = promisify(fs.readFile);
+const writeFilePromise = promisify(fs.writeFile);
 
 const pathDB = path.join(process.cwd(), 'dataBase', 'users.json');
 
@@ -26,11 +27,12 @@ module.exports = {
     return users;
   },
 
+
   findUserById: async (userId, preferLanguage) => {
     const data = await readFilePromise(pathDB);
     const users = JSON.parse(data);
 
-    const chosenUser = users.find(user => user.id === +userId)
+    const chosenUser = users.find(user => user.id === +userId);
 
     if (!chosenUser) {
       throw new Error(errorMessages.USER_NOT_FOUND[preferLanguage]);
@@ -40,11 +42,17 @@ module.exports = {
   },
 
 
+  createUser: async (newUser, preferLanguage) => {
+    const data = await readFilePromise(pathDB);
+    const users = JSON.parse(data).sort((a, b) => a.id - b.id);
 
+    const userExists = users.some(user => user.email === newUser.email);
 
+    if (userExists) {
+      throw new Error(errorMessages.USER_IS_EXISTS[preferLanguage]);
+    }
 
-
-  createUser: (userObject) => {
-    DB.push(userObject);
+    users.push({...newUser, id: users[users.length - 1].id + 1});
+    await writeFilePromise(pathDB, JSON.stringify(users));
   }
 }

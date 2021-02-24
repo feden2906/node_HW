@@ -18,9 +18,9 @@ module.exports = {
 
   isUserValid: (req, res, next) => {
     try {
-      const {name, password, preferLanguage = 'en'} = req.body;
+      const {userName, password, preferLanguage = 'en'} = req.body;
 
-      if (!name || !password) {
+      if (!userName || !password) {
         throw new Error('Some filed is empty');
       }
 
