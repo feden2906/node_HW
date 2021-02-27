@@ -4,4 +4,4 @@ module.exports = {
   UNAUTHORIZED: 401,
   FOrBIDDEN: 403,
   SERVER_ERROR: 405
-}
+};

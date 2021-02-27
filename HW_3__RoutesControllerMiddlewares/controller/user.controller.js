@@ -17,7 +17,7 @@ module.exports = {
 
   getSingleUser: async (req, res) => {
     try {
-      const {userId} = req.params;
+      const { userId } = req.params;
       const { preferLanguage = 'en' } = req.body;
 
       const user = await userService.findUserById(userId, preferLanguage);
@@ -42,7 +42,7 @@ module.exports = {
 
   deleteUser: async (req, res) => {
     try {
-      const {userId} = req.params;
+      const { userId } = req.params;
       const { preferLanguage = 'en' } = req.body;
 
       await userService.deleteUser(userId, preferLanguage);
@@ -52,5 +52,4 @@ module.exports = {
       res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   }
-}
-
+};

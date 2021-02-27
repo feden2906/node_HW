@@ -48,4 +48,4 @@ module.exports = {
     en: 'Username cannot be a number',
     ua: 'Ім\'я користувача не може бути числом'
   }
-}
+};
