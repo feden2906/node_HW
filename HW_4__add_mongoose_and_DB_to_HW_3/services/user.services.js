@@ -22,7 +22,7 @@ module.exports = {
     throw new Error(statusMessages.USER_NOT_FOUND[prefLang]);
   },
 
-  createUser: async (userObject) => {
+  createUser: async (userObject) => { // TODO
     // const user = User.find({ email: userObject.email })
     //
     // if (user) {
