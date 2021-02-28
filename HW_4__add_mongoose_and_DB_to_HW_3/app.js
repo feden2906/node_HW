@@ -8,7 +8,7 @@ const app = express();
 // eslint-disable-next-line no-use-before-define
 _connectDB();
 
-app.use(express.json);
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', apiRouter);
 
