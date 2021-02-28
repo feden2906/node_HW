@@ -20,7 +20,10 @@ function _connectDB() {
   mongoose.connect('mongodb://localhost:27017/users_cars', { useNewUrlParser: true, useUnifiedTopology: true });
 
   const { connection } = mongoose;
+
   connection.on('error', (error) => {
-    console.log(error);
+    if (error) {
+      console.log(error);
+    }
   });
 }
