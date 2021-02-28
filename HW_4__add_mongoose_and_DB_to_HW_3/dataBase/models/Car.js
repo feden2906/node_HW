@@ -5,4 +5,5 @@ const carSchema = new Schema({
   price: { type: Number }
 });
 
+
 module.exports = model('Car', carSchema);
