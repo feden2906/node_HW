@@ -1,42 +1,53 @@
 const userService = require('../services/user.services');
+const statusCodes = require('../constants/statusCodes.enum');
+const statusMessages = require('../constants/statusMessages');
 
 module.exports = {
   getAllUsers: async (req, res) => {
     try {
-      const users = await userService.findAllUsers();
+      const { prefLang = 'en' } = req.query;
+
+      const users = await userService.findAllUsers(prefLang);
 
       res.json(users);
     } catch (e) {
-      res.status().json(e.message);
+      res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   },
 
-  getUserById: async ({ params: { userID } }, res) => {
+  getUserById: async (req, res) => {
     try {
-      const user = await userService.findUserById(userID);
+      const { params: { userID }, query: { prefLang = 'en' } } = req;
+
+      const user = await userService.findUserById(userID, prefLang);
 
       res.json(user);
     } catch (e) {
-      res.status().json(e.message);
+      res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   },
 
   createUser: async (req, res) => {
     try {
-      await userService.createUser(req.body);
+      const { body, query: { prefLang = 'en' } } = req;
 
-      res.status(201).json('Created');
+      await userService.createUser(body, prefLang);
+
+      res.status(statusCodes.CREATED).json(statusMessages.USER_IS_CREATED[prefLang]);
     } catch (e) {
-      res.status(300).json(e.message);
+      res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   },
 
-  deleteUser: async ({ params: { userID } }, res) => {
+  deleteUser: async (req, res) => {
     try {
+      const { params: { userID }, query: { prefLang = 'en' } } = req;
+
       await userService.deleteUser(userID);
-      res.json('deleted');
+
+      res.json(statusMessages.USER_WAS_DELETED[prefLang]);
     } catch (e) {
-      res.status().json(e.message);
+      res.status(statusCodes.BAD_REQUEST).json(e.message);
     }
   }
 };
