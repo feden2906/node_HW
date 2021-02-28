@@ -20,12 +20,7 @@ module.exports = {
 
   isUserValid: (req, res, next) => {
     try {
-      const {
-        userName,
-        password,
-        email,
-        preferLanguage = 'en'
-      } = req.body;
+      const { userName, password, email, preferLanguage = 'en' } = req.body;
 
       if (!userName || !password || !email) {
         throw new Error(errorMessages.NOT_VALID_FORM[preferLanguage]);
@@ -45,8 +40,7 @@ module.exports = {
 
       next();
     } catch (e) {
-      res.status(errorCodes.BAD_REQUEST)
-        .json(e.message);
+      res.status(errorCodes.BAD_REQUEST).json(e.message);
     }
   }
 };
