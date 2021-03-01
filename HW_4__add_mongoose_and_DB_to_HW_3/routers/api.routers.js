@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 const userRouter = require('./user.routers');
-// const carRouter = require('./car.routers');
+const carRouter = require('./car.routers');
 
 router.use('/users', userRouter);
-// router.use('/cars', carRouter);
+router.use('/cars', carRouter);
 
 module.exports = router;
