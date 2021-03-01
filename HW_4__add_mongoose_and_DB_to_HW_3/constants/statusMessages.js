@@ -10,11 +10,27 @@ module.exports = {
     en: 'Users not found',
     ua: 'Користувачів не знайдено'
   },
+  //
+  CAR_NOT_FOUND: {
+    en: 'Car not found',
+    ua: 'Автомобіль не знайдено'
+  },
+
+  //
+  CARS_NOT_FOUND: {
+    en: 'Cars not found',
+    ua: 'Автомобілі не знайдено'
+  },
 
   //
   USER_IS_CREATED: {
     en: 'User is created',
     ua: 'Користувача створено'
+  },
+
+  CAR_IS_CREATED: {
+    en: 'Car is created',
+    ua: 'Автомобіль створено'
   },
 
   USER_IS_EXISTS: {
@@ -26,6 +42,11 @@ module.exports = {
   USER_WAS_DELETED: {
     en: 'User was deleted',
     ua: 'Користувача видалено'
+  },
+  //
+  CAR_WAS_DELETED: {
+    en: 'Car was deleted',
+    ua: 'Автомобіль видалено'
   },
 
   //
