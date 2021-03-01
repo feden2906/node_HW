@@ -22,7 +22,7 @@ module.exports = {
     throw new Error(statusMessages.USER_NOT_FOUND[prefLang]);
   },
 
-  createUser: async (userObject) => { // TODO
+  createUser: async (userObject) => { // TODO   Не зрозумів як додати перевірку на унікальність емейлу
     // const user = User.find({ email: userObject.email })
     //
     // if (user) {
